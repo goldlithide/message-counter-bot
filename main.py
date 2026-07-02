@@ -1,0 +1,15 @@
+import discord
+
+BOT_TOKEN = "insert your bot token here"
+
+class MyBot(commands.Bot):
+    def __init__(self):
+        super().__init__(command_prefix="/", intents=discord.Intents.all())
+    async def setup_hook(self):
+        for filename in os.listdir('./cogs'):
+            if filename.endswith('.py'):
+                await self.load_extension(f'cogs.{filename[:-3]}')
+        
+bot = MyBot()
+
+bot.run(BOT_TOKEN)
